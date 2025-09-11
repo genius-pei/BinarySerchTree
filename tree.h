@@ -23,7 +23,7 @@ public:
 		if (_root == nullptr)
 		{
 			_root = new Node(key);
-			return true
+			return true;
 		}
 	}
 private:
