@@ -25,6 +25,22 @@ public:
 			_root = new Node(key);
 			return true;
 		}
+		Node* cur = _root;
+		while (cur)
+		{
+			if (cur->_key < key)
+			{
+				cur = cur->_right;
+			}
+			else if (cur->_key > key)
+			{
+				cur = cur->_left;
+			}
+			else
+			{
+				return false;
+			}
+		}
 	}
 private:
 	Node* _root = nullptr;
