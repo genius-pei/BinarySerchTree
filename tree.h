@@ -1,5 +1,8 @@
 #pragma once
+#include<iostream>
+using namespace std;
 template<class k>
+
 struct BSTnode
 {
 	k _key;
@@ -8,7 +11,7 @@ struct BSTnode
 	BSTnode(const k& key)
 		:_key(key)
 		, _left(nullptr)
-		, _right(nulllptr)
+		, _right(nullptr)
 	{
 
 	}
@@ -36,7 +39,7 @@ public:
 			}
 			else if (cur->_key > key)
 			{
-				parnt = cur;
+				parent = cur;
 				cur = cur->_left;
 			}
 			else
@@ -56,13 +59,20 @@ public:
 
 		return true;
 	}
-	void InOrder(Node* root)//中序，左中右
+	void InOrder()
+	{
+		_InOrder(_root);
+	}
+private:
+	void _InOrder(Node* root)//中序，左中右
 	{
 		if (root == nullptr)
 		{
 			return;
 		}
-		InOrder
+		_InOrder(root->_left);
+		cout << root->_key << " ";
+		_InOrder(root->_right);
 	}
 private:
 	Node* _root = nullptr;
