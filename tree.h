@@ -64,8 +64,31 @@ public:
 	{
 		_InOrder(_root);
 	}
-	bool Find(const K& key)
+	bool Find(const k& key)
 	{
+		Node* cur = _root;
+
+		while (cur)//确定新插入值的位置
+		{
+			if (cur->_key < key)
+			{
+				cur = cur->_right;
+			}
+			else if (cur->_key > key)
+			{
+				cur = cur->_left;
+			}
+			else
+			{
+				return true;
+			}
+			return false;
+		}
+	}
+	bool Erase(const k& key)
+	{
+		
+		Node* parent = nullptr;
 		Node* cur = _root;
 
 		while (cur)//确定新插入值的位置
@@ -80,12 +103,60 @@ public:
 				parent = cur;
 				cur = cur->_left;
 			}
-			else
+			else//准备删除
 			{
+				if (cur->_left == nullptr)//左为空
+				{
+					if (cur==parent->_left)//如果要删除的是左节点
+					{
+						parent->_left = cur->_right;
+					}
+					else
+					{
+						parent->_right = cur->_right;
+					}
+					delete cur;
+				}
+				else if (cur->_right==nullptr)//右为空
+				{
+					if (cur == parent->_left)//如果要删除的是左节点
+					{
+						parent->_left = cur->_right;
+					}
+					else
+					{
+						parent->_right = cur->_right;
+					}
+					delete cur;
+				}
+				else//左右都不为空,找子树适合的节点替代，最小的右节点，或者最大的左节点
+				{
+					Node* minrightparent = cur;
+					Node* minright = cur->_right;
+					{
+						while (minright->_left)
+						{
+							minrightparent = minright;
+							minright = minright->_left;
+						}
+						swap(cur->_key, minright->_key);
+						if (minright == minrightparent->_left)
+						{
+							minrightparent->_left = minright->_right;
+						}
+						else
+						{
+							minrightparent->_right = minright->_right;
+						}
+						delete minright;
+					}
+				}
 				return true;
 			}
-			return false;
+
 		}
+
+		return false;
 	}
 private:
 	void _InOrder(Node* root)//中序，左中右
@@ -97,6 +168,7 @@ private:
 		_InOrder(root->_left);
 		cout << root->_key << " ";
 		_InOrder(root->_right);
+
 	}
 private:
 	Node* _root = nullptr;
