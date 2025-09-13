@@ -11,6 +11,9 @@ int main()
 		t1.insert(e);
 	}
 	t1.InOrder();
+	t1.Erase(5);
+	cout << endl;
+	t1.InOrder();
 	return 0;
 }
 
