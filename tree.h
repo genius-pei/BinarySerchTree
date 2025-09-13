@@ -28,8 +28,9 @@ public:
 			_root = new Node(key);
 			return true;
 		}
-		Node* cur = _root;
 		Node* parent = nullptr;
+		Node* cur = _root;
+		
 		while (cur)//确定新插入值的位置
 		{
 			if (cur->_key < key)
@@ -59,9 +60,32 @@ public:
 
 		return true;
 	}
-	void InOrder()
+	void InOrder()//无法直接调用根，嵌套一层
 	{
 		_InOrder(_root);
+	}
+	bool Find(const K& key)
+	{
+		Node* cur = _root;
+
+		while (cur)//确定新插入值的位置
+		{
+			if (cur->_key < key)
+			{
+				parent = cur;
+				cur = cur->_right;
+			}
+			else if (cur->_key > key)
+			{
+				parent = cur;
+				cur = cur->_left;
+			}
+			else
+			{
+				return true;
+			}
+			return false;
+		}
 	}
 private:
 	void _InOrder(Node* root)//中序，左中右
@@ -77,3 +101,4 @@ private:
 private:
 	Node* _root = nullptr;
 };
+
