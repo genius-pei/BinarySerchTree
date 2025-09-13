@@ -26,14 +26,17 @@ public:
 			return true;
 		}
 		Node* cur = _root;
-		while (cur)
+		Node* parent = nullptr;
+		while (cur)//确定新插入值的位置
 		{
 			if (cur->_key < key)
 			{
+				parent = cur;
 				cur = cur->_right;
 			}
 			else if (cur->_key > key)
 			{
+				parnt = cur;
 				cur = cur->_left;
 			}
 			else
@@ -41,6 +44,25 @@ public:
 				return false;
 			}
 		}
+		cur = new Node(key);
+		if (parent->_key < key)
+		{
+			parent->_right = cur;
+		}
+		else
+		{
+			parent->_left = cur;
+		}
+
+		return true;
+	}
+	void InOrder(Node* root)//中序，左中右
+	{
+		if (root == nullptr)
+		{
+			return;
+		}
+		InOrder
 	}
 private:
 	Node* _root = nullptr;
