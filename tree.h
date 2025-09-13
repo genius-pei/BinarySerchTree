@@ -107,25 +107,41 @@ public:
 			{
 				if (cur->_left == nullptr)//左为空
 				{
-					if (cur==parent->_left)//如果要删除的是左节点
+					if (cur != _root)
 					{
-						parent->_left = cur->_right;
+						if (cur == parent->_left)//如果要删除的是左节点
+						{
+							parent->_left = cur->_right;
+						}
+						else
+						{
+							parent->_right = cur->_right;
+						}
 					}
 					else
 					{
-						parent->_right = cur->_right;
+						_root = cur->_right;
 					}
+
+
 					delete cur;
 				}
 				else if (cur->_right==nullptr)//右为空
 				{
-					if (cur == parent->_left)//如果要删除的是左节点
+					if (cur != _root)
 					{
-						parent->_left = cur->_right;
+						if (cur == parent->_left)//如果要删除的是左节点
+						{
+							parent->_left = cur->_right;
+						}
+						else
+						{
+							parent->_right = cur->_right;
+						}
 					}
 					else
 					{
-						parent->_right = cur->_right;
+						_root = cur->_left;
 					}
 					delete cur;
 				}
