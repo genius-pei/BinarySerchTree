@@ -1,5 +1,16 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include<iostream>
 
-using namespace std;
+#include"tree.h"
+
+int main()
+{
+	int a[] = { 2,4,3,6,8,7,5,9 };
+	BSTree<int> t1;
+	for (auto e : a)
+	{
+		t1.insert(e);
+	}
+	t1.InOrder();
+	return 0;
+}
 
