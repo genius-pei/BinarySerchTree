@@ -64,6 +64,10 @@ public:
 	{
 		_InOrder(_root);
 	}
+	bool insertR(const k& key)
+	{
+		return _Insert(_root,key);
+	}
 	bool Find(const k& key)
 	{
 		Node* cur = _root;
@@ -175,6 +179,26 @@ public:
 		return false;
 	}
 private:
+	 bool _Insert(Node*& root,const k& key)
+	 {
+		 if (root == nullptr)
+		 {
+			 root = new Node(key);
+			 return true;
+		 }
+		 if (root->_key < key)
+		 {
+			 return _Insert(root->_right, key);
+		 }
+		 else if (root->_key > key)
+		 {
+			 return _Insert(root->_left, key);
+		 }
+		 else
+		 {
+			 return false;
+		 }
+	 }
 	void _InOrder(Node* root)//ÖÐÐò£¬×óÖÐÓÒ
 	{
 		if (root == nullptr)
