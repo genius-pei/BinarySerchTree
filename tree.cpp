@@ -8,7 +8,7 @@ int main()
 	BSTree<int> t1;
 	for (auto e : a)
 	{
-		t1.insert(e);
+		t1.insertR(e);
 	}
 	t1.InOrder();
 	t1.Erase(5);
